@@ -19,13 +19,6 @@ public class MovieModel  implements Parcelable {
 
     private String original_language;
 
-
-    // For purpose of simplicity, i will use the release_date instead of category
-    // genres is nested json object, we will learn it later on this series
-
-
-
-
     //Constructor
 
 

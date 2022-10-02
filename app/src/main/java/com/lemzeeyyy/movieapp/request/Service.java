@@ -1,4 +1,4 @@
-package com.lemzeeyyy.movieapp.response;
+package com.lemzeeyyy.movieapp.request;
 
 import com.lemzeeyyy.movieapp.utils.Credentials;
 
