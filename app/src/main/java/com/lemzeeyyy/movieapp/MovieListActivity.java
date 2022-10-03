@@ -1,15 +1,18 @@
 package com.lemzeeyyy.movieapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.util.Log;
 
 import com.lemzeeyyy.movieapp.model.MovieModel;
-import com.lemzeeyyy.movieapp.request.MovieApi;
+import com.lemzeeyyy.movieapp.API.MovieApi;
 import com.lemzeeyyy.movieapp.request.Service;
 import com.lemzeeyyy.movieapp.response.MovieSearchResponse;
 import com.lemzeeyyy.movieapp.utils.Credentials;
+import com.lemzeeyyy.movieapp.viewmodel.MovieListViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +22,22 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MovieListActivity extends AppCompatActivity {
+    private MovieListViewModel movieListViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       getMovieByIdSearch();
+
+       movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
+    }
+    private void observeChange(){
+        movieListViewModel.getMyMovies().observe(this, new Observer<List<MovieModel>>() {
+            @Override
+            public void onChanged(List<MovieModel> movieModels) {
+
+            }
+        });
     }
 
     private void getMovieByIdSearch() {

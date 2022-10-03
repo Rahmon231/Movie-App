@@ -1,5 +1,6 @@
 package com.lemzeeyyy.movieapp.request;
 
+import com.lemzeeyyy.movieapp.API.MovieApi;
 import com.lemzeeyyy.movieapp.utils.Credentials;
 
 import retrofit2.Retrofit;

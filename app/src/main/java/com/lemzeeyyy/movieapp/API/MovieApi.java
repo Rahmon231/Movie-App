@@ -1,4 +1,4 @@
-package com.lemzeeyyy.movieapp.request;
+package com.lemzeeyyy.movieapp.API;
 
 import com.lemzeeyyy.movieapp.model.MovieModel;
 import com.lemzeeyyy.movieapp.response.MovieSearchResponse;
