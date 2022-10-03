@@ -13,10 +13,6 @@ public class MovieResponse {
         return movie;
     }
 
-    public void setMovie(MovieModel movie) {
-        this.movie = movie;
-    }
-
     @Override
     public String toString() {
         return "MovieResponse{" +

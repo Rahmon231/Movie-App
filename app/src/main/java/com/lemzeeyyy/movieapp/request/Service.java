@@ -13,9 +13,9 @@ public class Service {
 
     private static Retrofit retrofit = retrofitBuilder.build();
 
-    private MovieApi movieApi = retrofit.create(MovieApi.class);
+    private static MovieApi movieApi = retrofit.create(MovieApi.class);
 
-    public MovieApi getMovieApi() {
+    public static MovieApi getMovieApi() {
         return movieApi;
     }
 }
