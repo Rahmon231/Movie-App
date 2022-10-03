@@ -5,17 +5,19 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.lemzeeyyy.movieapp.model.MovieModel;
+import com.lemzeeyyy.movieapp.repositories.MovieRepository;
 
 import java.util.List;
 
 public class MovieListViewModel extends ViewModel {
-    private MutableLiveData<List<MovieModel>> myMovies = new MutableLiveData<>();
 
+    private MovieRepository movieRepository;
 
     public MovieListViewModel() {
+        movieRepository = MovieRepository.getInstance();
     }
 
     public LiveData<List<MovieModel>> getMyMovies() {
-        return myMovies;
+        return movieRepository.getMovies();
     }
 }
