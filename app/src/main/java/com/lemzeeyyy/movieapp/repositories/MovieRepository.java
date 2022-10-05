@@ -11,6 +11,8 @@ import java.util.List;
 public class MovieRepository {
     private MovieApiClient movieApiClient;
     private static MovieRepository instance;
+    private String mQuery;
+    private int mPageNumber;
 
 
     public static MovieRepository getInstance(){
@@ -30,5 +32,11 @@ public class MovieRepository {
 
     public LiveData<List<MovieModel>> getMovies(){
         return movieApiClient.getMovies();
+    }
+
+    public void searchMovieApi(String query, int pageNumber){
+        mQuery = query;
+        mPageNumber = pageNumber;
+        MovieApiClient.getInstance().searchMovieApi(query, pageNumber);
     }
 }
