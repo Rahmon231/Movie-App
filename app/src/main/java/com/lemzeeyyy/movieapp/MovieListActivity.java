@@ -30,7 +30,9 @@ public class MovieListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
        movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
+
        searchMovieApi("Fast",1);
+        observeChange();
     }
     private void observeChange(){
         movieListViewModel.getMyMovies().observe(this, new Observer<List<MovieModel>>() {
