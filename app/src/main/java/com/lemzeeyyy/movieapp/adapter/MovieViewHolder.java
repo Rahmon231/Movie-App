@@ -13,11 +13,13 @@ public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnC
     ImageView imageView;
     RatingBar ratingBar;
     OnMovieListener onMovieListener;
+
     public MovieViewHolder(@NonNull View itemView,OnMovieListener onMovieListener) {
         super(itemView);
+        this.onMovieListener = onMovieListener;
         imageView = itemView.findViewById(R.id.movie_img);
         ratingBar = itemView.findViewById(R.id.rating_bar);
-        this.onMovieListener = onMovieListener;
+
         itemView.setOnClickListener(this);
     }
 

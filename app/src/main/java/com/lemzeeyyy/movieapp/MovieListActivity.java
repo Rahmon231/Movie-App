@@ -2,6 +2,8 @@ package com.lemzeeyyy.movieapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+
+import android.widget.Toast;
 
 import com.lemzeeyyy.movieapp.adapter.MovieRecyclerAdapter;
 import com.lemzeeyyy.movieapp.adapter.OnMovieListener;
@@ -30,12 +35,21 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
     private MovieListViewModel movieListViewModel;
     private MovieRecyclerAdapter movieRecyclerAdapter;
     private RecyclerView recyclerView;
+    private Toolbar toolbar;
+    private SearchView searchView;
+    boolean isPopular = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recyclerView);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        searchView = findViewById(R.id.search_view);
+        setUpSearchView();
+
+
 
        movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
 
@@ -136,8 +150,40 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
         });
     }
 
+    public void setUpSearchView(){
+
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              isPopular = false;
+                Log.v("Tagy", "ispop: " +isPopular);
+            }
+        });
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                return false;
+            }
+        });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                movieListViewModel.searchMovieApi(query,1);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+    }
+
     @Override
     public void onMovieClick(int position) {
+        Toast.makeText(this, "Position is "+position, Toast.LENGTH_SHORT)
+                .show();
+        Log.d("Lemzy", "onMovieClick: "+position);
 
     }
 
@@ -145,4 +191,5 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
     public void onCategoryClick(String category) {
 
     }
+
 }
