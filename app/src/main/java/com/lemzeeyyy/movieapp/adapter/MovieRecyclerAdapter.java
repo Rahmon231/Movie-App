@@ -14,10 +14,13 @@ import com.lemzeeyyy.movieapp.model.MovieModel;
 
 import java.util.List;
 
-public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class MovieRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private List<MovieModel> movies;
     OnMovieListener onMovieListener;
 
+    public MovieRecyclerAdapter(OnMovieListener onMovieListener) {
+        this.onMovieListener = onMovieListener;
+    }
 
     @NonNull
     @Override
@@ -41,7 +44,10 @@ public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemCount() {
-        return movies.size();
+        if(movies!=null) {
+            return movies.size();
+        }
+        return 0;
     }
 
     public void setMovies(List<MovieModel> movies) {
