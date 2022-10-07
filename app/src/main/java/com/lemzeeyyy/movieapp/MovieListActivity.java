@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -209,9 +210,10 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
 
     @Override
     public void onMovieClick(int position) {
-        Toast.makeText(this, "Position is "+position, Toast.LENGTH_SHORT)
-                .show();
-        Log.d("Lemzy", "onMovieClick: "+position);
+        Intent intent = new Intent(this, MovieDetails.class);
+        intent.putExtra("movie", movieRecyclerAdapter.getSelectedMovie(position));
+        startActivity(intent);
+
 
     }
 
