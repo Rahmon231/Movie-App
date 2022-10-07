@@ -44,6 +44,7 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recyclerView);
         searchView = findViewById(R.id.search_view);
+        setUpSearchView();
 
 
         movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
@@ -173,9 +174,6 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
             }
         });
     }
-    public void getMoviesResponse(){
-
-    }
 
     public void setUpSearchView(){
 
@@ -183,12 +181,13 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
             @Override
             public void onClick(View v) {
               isPopular = false;
-//                Log.v("Tagy", "ispop: " +isPopular);
+               Log.v("Tagy", "ispop: " +isPopular);
             }
         });
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
+                movieListViewModel.searchMoviePop(1);
                 return false;
             }
         });

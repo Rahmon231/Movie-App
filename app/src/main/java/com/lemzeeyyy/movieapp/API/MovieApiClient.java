@@ -38,6 +38,14 @@ public class MovieApiClient {
 
     private MovieApiClient(){
         myMovies = new MutableLiveData<>();
+        mMoviesPop = new MutableLiveData<>();
+//        Log.d("Checking", "MovieApiClient: "+myMovies.getValue());
+//        Log.d("Checking", "MovieApiClient: "+mMoviesPop.getValue());
+//        Log.d("Checking", "MovieApiClient: "+getPop().getValue());
+//        Log.d("Checking", "MovieApiClient: "+getMovies().getValue());
+//        searchMoviesPop(1);
+//        searchMovieApi("Fast",1);
+
     }
 
     public LiveData<List<MovieModel>> getMovies(){
@@ -45,6 +53,7 @@ public class MovieApiClient {
         return myMovies;
     }
     public LiveData<List<MovieModel>> getPop(){
+       // Log.d("PopularMoviesList", "getPop: "+mMoviesPop.getValue());
         return mMoviesPop;
     }
 
@@ -53,6 +62,12 @@ public class MovieApiClient {
             retrieveMoviesRunnable = null;
         }
         retrieveMoviesRunnable = new RetrieveMoviesRunnable(query, pageNumber);
+//        try {
+//            Log.d("Checking", "searchMovieApi: "+retrieveMoviesRunnable.getMovies("Fast",1).execute().body().getMovies());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
 
         final Future myHandler = AppExecutors.getInstance().networkIO().submit(retrieveMoviesRunnable);
         AppExecutors.getInstance().networkIO().schedule(new Runnable() {
@@ -160,7 +175,6 @@ public class MovieApiClient {
 
 
         public RetrieveMoviesRunnablePop(int pageNumber) {
-
             this.pageNumber = pageNumber;
             cancelRequest = false;
         }
