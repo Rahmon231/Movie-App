@@ -26,9 +26,6 @@ public class MovieRepository {
         movieApiClient = MovieApiClient.getInstance();
     }
 
-    public MovieRepository(MovieApiClient movieApiClient) {
-        this.movieApiClient = movieApiClient;
-    }
 
     public LiveData<List<MovieModel>> getMovies(){
         return movieApiClient.getMovies();
@@ -38,5 +35,19 @@ public class MovieRepository {
         mQuery = query;
         mPageNumber = pageNumber;
         MovieApiClient.getInstance().searchMovieApi(query, pageNumber);
+    }
+    public LiveData<List<MovieModel>> getPop(){
+        return movieApiClient.getPop();
+    }
+
+    // 2- Calling the method in repository
+    public void searchMoviePop(int pageNumber){
+
+        mPageNumber = pageNumber;
+        movieApiClient.searchMoviesPop( pageNumber);
+    }
+
+    public void searchNextPage(){
+        searchMovieApi(mQuery, mPageNumber+1);
     }
 }

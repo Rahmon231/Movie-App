@@ -11,12 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.lemzeeyyy.movieapp.R;
 import com.lemzeeyyy.movieapp.model.MovieModel;
+import com.lemzeeyyy.movieapp.utils.Credentials;
 
 import java.util.List;
 
 public class MovieRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private List<MovieModel> movies;
     OnMovieListener onMovieListener;
+    private static final int DISPLAY_POP = 1;
+    private static final int DISPLAY_SEARCH = 2;
+
 
     public MovieRecyclerAdapter(OnMovieListener onMovieListener) {
         this.onMovieListener = onMovieListener;
@@ -54,5 +58,26 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
         this.movies = movies;
         notifyDataSetChanged();
     }
+    public MovieModel getSelectedMovie(int position){
+        if (movies != null){
+            if (movies.size() > 0){
+                return movies.get(position);
+            }
+        }
+        return  null;
+    }
+
+
+    @Override
+    public int getItemViewType(int position) {
+
+        if (Credentials.POPULAR){
+            return DISPLAY_POP;
+        }
+        else
+            return DISPLAY_SEARCH;
+    }
+
+
 }
 
