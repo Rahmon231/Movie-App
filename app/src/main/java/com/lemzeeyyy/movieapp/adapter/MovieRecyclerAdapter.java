@@ -29,20 +29,48 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_list_item,parent,false);
-        return new MovieViewHolder(view,onMovieListener);
+        View view = null;
+
+        if (viewType == DISPLAY_SEARCH) {
+
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_list_item,
+                    parent, false);
+            return new MovieViewHolder(view, onMovieListener);
+        }
+
+        else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.popular_layout,
+                    parent, false);
+            return new PopularViewHolder(view, onMovieListener);
+        }
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-        ((MovieViewHolder)holder).ratingBar.setRating((movies.get(position).getVote_average())/2);
+        int itemViewType = getItemViewType(position);
+        if (itemViewType == DISPLAY_SEARCH){
 
-        // ImageView: Using Glide Library
-        Glide.with(holder.itemView.getContext())
-                .load( "https://image.tmdb.org/t/p/w500/"
-                        +movies.get(position).getPoster_path())
-                .into(((MovieViewHolder)holder).imageView);
+            // vote average is over 10, and our rating bar is over 5 stars: dividing by 2
+            ((MovieViewHolder)holder).ratingBar.setRating((movies.get(position).getVote_average())/2);
+
+            // ImageView: Using Glide Library
+            Glide.with(holder.itemView.getContext())
+                    .load( "https://image.tmdb.org/t/p/w500/"
+                            +movies.get(position).getPoster_path())
+                    .into(((MovieViewHolder)holder).imageView);
+
+        }else{
+            ((PopularViewHolder)holder).ratingBarPop.setRating(movies.get(position).getVote_average());
+
+            // ImageView: Using Glide Library
+            Glide.with(holder.itemView.getContext())
+                    .load( "https://image.tmdb.org/t/p/w500/"
+                            +movies.get(position).getPoster_path())
+                    .into(((PopularViewHolder)holder).imageViewPop);
+
+        }
+
 
     }
 
