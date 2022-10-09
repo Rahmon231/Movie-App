@@ -84,7 +84,6 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
                         // Get the data in log
                         movieRecyclerAdapter.setMovies(movieModels);
 
-
                     }
                 }
 
@@ -189,6 +188,7 @@ public class MovieListActivity extends AppCompatActivity implements OnMovieListe
             @Override
             public boolean onClose() {
                 movieListViewModel.searchMoviePop(1);
+                isPopular = true;
                 return false;
             }
         });

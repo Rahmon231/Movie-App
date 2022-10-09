@@ -18,8 +18,8 @@ import com.lemzeeyyy.movieapp.R;
         public PopularViewHolder(@NonNull View itemView, OnMovieListener onMovieListener) {
             super(itemView);
             this.onMovieListener = onMovieListener;
-            imageViewPop = itemView.findViewById(R.id.movie_img);
-            ratingBarPop = itemView.findViewById(R.id.rating_bar);
+            imageViewPop = itemView.findViewById(R.id.movie_img_popualar);
+            ratingBarPop = itemView.findViewById(R.id.rating_bar_pop);
 
             itemView.setOnClickListener(this);
         }
